@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014-2017  Rinat Ibragimov
+ * Copyright © 2017  Rinat Ibragimov
  *
  * This file is part of "apulse" project.
  *
@@ -22,44 +22,29 @@
  * SOFTWARE.
  */
 
-#ifndef APULSE__RINGBUFFER_H
-#define APULSE__RINGBUFFER_H
+#include "apulse.h"
+#include "trace.h"
+#include <pulse/glib-mainloop.h>
 
-#include <pthread.h>
+APULSE_EXPORT
+pa_glib_mainloop *
+pa_glib_mainloop_new(GMainContext *c)
+{
+    trace_info_z("Z %s c=%p\n", __func__, c);
+    return NULL;
+}
 
-typedef struct {
-    char               *start;
-    char               *end;
-    char               *rpos;
-    char               *wpos;
-    pthread_mutex_t     lock;
-    int                 empty;
-} ringbuffer_t;
-
-
-ringbuffer_t *
-ringbuffer_new(size_t sz);
-
+APULSE_EXPORT
 void
-ringbuffer_free(ringbuffer_t *rb);
+pa_glib_mainloop_free(pa_glib_mainloop *g)
+{
+    trace_info_z("Z %s g=%p\n", __func__, g);
+}
 
-size_t
-ringbuffer_readable_size(ringbuffer_t *rb);
-
-size_t
-ringbuffer_writable_size(ringbuffer_t *rb);
-
-size_t
-ringbuffer_write(ringbuffer_t *rb, const void *data, size_t len);
-
-size_t
-ringbuffer_read(ringbuffer_t *rb, void *data, size_t len);
-
-/** get data from ring buffer without advancing read pointer */
-size_t
-ringbuffer_peek(ringbuffer_t *rb, void *data, size_t len);
-
-size_t
-ringbuffer_drop(ringbuffer_t *rb, size_t len);
-
-#endif // APULSE__RINGBUFFER_H
+APULSE_EXPORT
+pa_mainloop_api *
+pa_glib_mainloop_get_api(pa_glib_mainloop *g)
+{
+    trace_info_z("Z %s g=%p\n", __func__, g);
+    return NULL;
+}

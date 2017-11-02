@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014-2015  Rinat Ibragimov
+ * Copyright © 2014-2017  Rinat Ibragimov
  *
  * This file is part of "apulse" project.
  *
@@ -86,7 +86,11 @@ APULSE_EXPORT
 pa_usec_t
 pa_bytes_to_usec(uint64_t length, const pa_sample_spec *spec)
 {
-    return 1000 * 1000 * length / pa_bytes_per_second(spec);
+    size_t bytes_per_second = pa_bytes_per_second(spec);
+    if (bytes_per_second == 0)
+        return 0;
+
+    return 1000 * 1000 * length / bytes_per_second;
 }
 
 APULSE_EXPORT
@@ -184,7 +188,9 @@ APULSE_EXPORT
 char *
 pa_sample_spec_snprint(char *s, size_t l, const pa_sample_spec *spec)
 {
-    trace_info_f("F %s s=%p, l=%u, spec=%p\n", __func__, s, (unsigned)l, spec);
+    gchar *s_spec = trace_pa_sample_spec_as_string(spec);
+    trace_info_f("F %s s=%p, l=%u, spec=%s\n", __func__, s, (unsigned)l, s_spec);
+    g_free(s_spec);
 
     if (spec && pa_sample_spec_valid(spec)) {
         snprintf(s, l, "%s %uch %uHz", pa_sample_format_to_string(spec->format), spec->channels,

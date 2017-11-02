@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014-2015  Rinat Ibragimov
+ * Copyright © 2014-2017  Rinat Ibragimov
  *
  * This file is part of "apulse" project.
  *
@@ -102,4 +102,11 @@ pa_operation_unref(pa_operation *o)
     o->ref_cnt --;
     if (o->ref_cnt == 0)
         g_slice_free(pa_operation, o);
+}
+
+APULSE_EXPORT
+void
+pa_operation_set_state_callback(pa_operation *o, pa_operation_notify_cb_t cb, void *userdata)
+{
+    trace_info_z("Z %s\n", __func__);
 }
