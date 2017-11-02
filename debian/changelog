@@ -2,10 +2,6 @@ apulse (0.1.10+git20171102-1) unstable; urgency=medium
 
   ** SNAPSHOT build @24d1fc1445b3f335b056b7d5816f1c1b3bdf7f74 **
 
- -- Mirek Kratochvil <exa.exa@gmail.com>  Thu, 02 Nov 2017 17:38:03 +0100
-
-apulse (0.1.10-1) unstable; urgency=medium
-
   * Initial release (Closes: #775098)
 
- -- Mirek Kratochvil <exa.exa@gmail.com>  Thu, 02 Nov 2017 16:16:47 +0100
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Thu, 02 Nov 2017 17:38:03 +0100
