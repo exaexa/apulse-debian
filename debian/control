@@ -1,0 +1,24 @@
+Source: apulse
+Section: sound
+Priority: optional
+Maintainer: Mirek Kratochvil <exa.exa@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 4.1.1
+Homepage: https://github.com/exaexa/apulse
+#Vcs-Git: https://anonscm.debian.org/collab-maint/apulse.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/apulse.git
+
+Package: apulse
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PulseAudio emulation for ALSA
+ The program provides an alternative partial implementation of the PulseAudio
+ API. It consists of a loader script and a number of shared libraries with the
+ same names as from original PulseAudio, so applications could dynamically load
+ them and think they are talking to PulseAudio. Internally, no separate sound
+ mixing daemon is used. Instead, apulse relies on ALSA's dmix, dsnoop, and plug
+ plugins to handle multiple sound sources and capture streams running at the
+ same time. dmix plugin muxes multiple playback streams; dsnoop plugin allow
+ multiple applications to capture from a single microphone; and plug plugin
+ transparently converts audio between various sample formats, sample rates and
+ channel numbers.
