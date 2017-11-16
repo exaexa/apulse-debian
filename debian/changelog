@@ -1,6 +1,4 @@
-apulse (0.1.10+git20171103-1) unstable; urgency=medium
-
-  ** SNAPSHOT build @9f5eab261f8adc6245f4011bad970a0abb527e75 **
+apulse (0.1.10+git20171108-gaca334f-1) unstable; urgency=medium
 
   * Initial release (Closes: #775098)
 
