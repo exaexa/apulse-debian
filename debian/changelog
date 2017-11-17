@@ -1,3 +1,9 @@
+apulse (0.1.10+git20171108-gaca334f-2) unstable; urgency=medium
+
+  * Disable building for unsupported platforms (Closes: #882010)
+
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Fri, 17 Nov 2017 19:21:37 +0100
+
 apulse (0.1.10+git20171108-gaca334f-1) unstable; urgency=medium
 
   * Initial release (Closes: #775098)

@@ -9,7 +9,7 @@ Vcs-Git: https://github.com/exaexa/apulse-debian.git
 Vcs-Browser: https://github.com/exaexa/apulse-debian
 
 Package: apulse
-Architecture: any
+Architecture: linux-any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: PulseAudio emulation for ALSA
  The program provides an alternative partial implementation of the PulseAudio
