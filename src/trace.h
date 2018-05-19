@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014-2017  Rinat Ibragimov
+ * Copyright © 2014-2018  Rinat Ibragimov
  *
  * This file is part of "apulse" project.
  *
@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -22,33 +22,37 @@
  * SOFTWARE.
  */
 
-#ifndef APULSE__TRACE_H
-#define APULSE__TRACE_H
+#pragma once
 
 #include <glib.h>
-#include <pulse/pulseaudio.h>
 #include <pulse/channelmap.h>
+#include <pulse/pulseaudio.h>
 
-#if WITH_TRACE >= 2
+#if CONFIG_TRACE_LEVEL >= 2
 
-#define trace_info_f(...)   trace_info(__VA_ARGS__)
-#define trace_info_z(...)   trace_info(__VA_ARGS__)
+#define trace_info_f(...) trace_info(__VA_ARGS__)
+#define trace_info_z(...) trace_info(__VA_ARGS__)
 
-#elif WITH_TRACE == 1
+#elif CONFIG_TRACE_LEVEL == 1
 
 #define trace_info_f(...)
-#define trace_info_z(...)   trace_info(__VA_ARGS__)
+#define trace_info_z(...) trace_info(__VA_ARGS__)
 
-#else // WITH_TRACE == 0
+#else  // CONFIG_TRACE_LEVEL == 0
 
 #define trace_info_f(...)
 #define trace_info_z(...)
 
 #endif
 
-void    trace_info(const char *fmt, ...) __attribute__((format (printf, 1, 2)));
-void    trace_warning(const char *fmt, ...) __attribute__((format (printf, 1, 2)));
-void    trace_error(const char *fmt, ...) __attribute__((format (printf, 1, 2)));
+void
+trace_info(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+
+void
+trace_warning(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+
+void
+trace_error(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
 
 gchar *
 trace_pa_buffer_attr_as_string(const pa_buffer_attr *attr);
@@ -67,11 +71,3 @@ trace_pa_sample_format_t_as_string(pa_sample_format_t sf);
 
 gchar *
 trace_pa_sample_spec_as_string(const pa_sample_spec *ss);
-
-void
-trace_lock(void);
-
-void
-trace_unlock(void);
-
-#endif // APULSE__TRACE_H

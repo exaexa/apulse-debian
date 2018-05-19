@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014-2017  Rinat Ibragimov
+ * Copyright © 2014-2018  Rinat Ibragimov
  *
  * This file is part of "apulse" project.
  *
@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -22,27 +22,33 @@
  * SOFTWARE.
  */
 
+#include "trace.h"
+#include <pthread.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <sys/syscall.h>
-#include <pthread.h>
-#include "trace.h"
-
+#include <unistd.h>
 
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
+#if CONFIG_LOG_TO_STDERR
+static int log_to_stderr = 1;
+#else
+static int log_to_stderr = 0;
+#endif  // CONFIG_LOG_TO_STDERR
 
 void
 trace_info(const char *fmt, ...)
 {
+    FILE *fp = log_to_stderr ? stderr : stdout;
     pthread_mutex_lock(&lock);
     va_list args;
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    fprintf(stdout, "%d.%03d [apulse %5d] ", (int)tv.tv_sec, (int)tv.tv_usec/1000, (int)syscall(__NR_gettid));
+    fprintf(fp, "%d.%03d [apulse %5d] ", (int)tv.tv_sec,
+            (int)tv.tv_usec / 1000, (int)syscall(__NR_gettid));
     va_start(args, fmt);
-    vfprintf(stdout, fmt, args);
+    vfprintf(fp, fmt, args);
     va_end(args);
     pthread_mutex_unlock(&lock);
 }
@@ -50,11 +56,12 @@ trace_info(const char *fmt, ...)
 void
 trace_warning(const char *fmt, ...)
 {
+    FILE *fp = log_to_stderr ? stderr : stdout;
     pthread_mutex_lock(&lock);
     va_list args;
-    fprintf(stdout, "[apulse] [warning] ");
+    fprintf(fp, "[apulse] [warning] ");
     va_start(args, fmt);
-    vfprintf(stdout, fmt, args);
+    vfprintf(fp, fmt, args);
     va_end(args);
     pthread_mutex_unlock(&lock);
 }
@@ -78,9 +85,8 @@ trace_error(const char *fmt, ...)
     vfprintf(stderr, fmt, args);
     va_end(args);
 
-    if (!stdout_is_a_tty) {
-        // If stdout is redirected to a file, make sure it also gets error messages.
-        // That helps to figure out where errors were.
+    if (!log_to_stderr && !stdout_is_a_tty) {
+        // Send a copy to stdout, if it's redirected to a file.
         fprintf(stdout, "[apulse] [error] ");
         va_start(args, fmt);
         vfprintf(stdout, fmt, args);
@@ -95,9 +101,11 @@ trace_pa_buffer_attr_as_string(const pa_buffer_attr *attr)
 {
     gchar *res;
     if (attr) {
-        res = g_strdup_printf("{.maxlength=%u, .tlength=%u, .prebuf=%u, .minreq=%u, .fragsize=%u}",
-                              attr->maxlength, attr->tlength, attr->prebuf, attr->minreq,
-                              attr->fragsize);
+        res = g_strdup_printf(
+            "{.maxlength=%u, .tlength=%u, .prebuf=%u, .minreq=%u, "
+            ".fragsize=%u}",
+            attr->maxlength, attr->tlength, attr->prebuf, attr->minreq,
+            attr->fragsize);
     } else {
         res = g_strdup_printf("(nil)");
     }
@@ -112,7 +120,7 @@ trace_pa_volume_as_string(const pa_cvolume *v)
     GString *s = g_string_new(NULL);
 
     g_string_append_printf(s, "%d:{", v->channels);
-    for (unsigned int k = 0; k < channel_count ; k ++) {
+    for (unsigned int k = 0; k < channel_count; k++) {
         if (k != 0)
             g_string_append(s, ", ");
 
@@ -454,21 +462,9 @@ trace_pa_sample_spec_as_string(const pa_sample_spec *ss)
         return g_strdup("(nil)");
 
     gchar *s_format = trace_pa_sample_format_t_as_string(ss->format);
-    gchar *str =
-        g_strdup_printf("{.format=%s,.rate=%u,.channels=%u}", s_format, ss->rate, ss->channels);
+    gchar *str = g_strdup_printf("{.format=%s,.rate=%u,.channels=%u}", s_format,
+                                 ss->rate, ss->channels);
     g_free(s_format);
 
     return str;
-}
-
-void
-trace_lock(void)
-{
-    pthread_mutex_lock(&lock);
-}
-
-void
-trace_unlock(void)
-{
-    pthread_mutex_unlock(&lock);
 }

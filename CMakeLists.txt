@@ -1,7 +1,9 @@
 project(apulse)
 cmake_minimum_required (VERSION 2.8)
-add_definitions(-std=gnu99 -Wall -fPIC -fvisibility=hidden)
-add_definitions(-Werror=implicit-function-declaration)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -fPIC -fvisibility=hidden")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror=implicit-function-declaration")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
 
 find_package(PkgConfig REQUIRED)
 
@@ -10,12 +12,11 @@ pkg_check_modules(REQ glib-2.0 alsa REQUIRED)
 list(APPEND REQ_LIBRARIES m)
 
 set(WITH_TRACE 0 CACHE STRING "trace level: no tracing (0) / unimplemented only (1) / all (2)")
+set(LOG_TO_STDERR 0 CACHE STRING "send all log output to stderr")
 
-# trace level
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DWITH_TRACE=${WITH_TRACE}")
-
-# link with pthread
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+# Options.
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCONFIG_TRACE_LEVEL=${WITH_TRACE}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCONFIG_LOG_TO_STDERR=${LOG_TO_STDERR}")
 
 include_directories(${REQ_INCLUDE_DIRS})
 
