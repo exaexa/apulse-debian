@@ -2,8 +2,8 @@ Source: apulse
 Section: sound
 Priority: optional
 Maintainer: Mirek Kratochvil <exa.exa@gmail.com>
-Build-Depends: debhelper (>= 10), cmake, pkg-config, libasound2-dev, libglib2.0-dev
-Standards-Version: 4.1.1
+Build-Depends: debhelper (>= 11), cmake, pkg-config, libasound2-dev, libglib2.0-dev
+Standards-Version: 4.1.4
 Homepage: https://github.com/i-rinat/apulse
 Vcs-Git: https://github.com/exaexa/apulse-debian.git
 Vcs-Browser: https://github.com/exaexa/apulse-debian
