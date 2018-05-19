@@ -1,3 +1,9 @@
+apulse (0.1.11-1) unstable; urgency=medium
+
+  * Upstream version 0.1.11 (Closes: #899043)
+
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Sat, 19 May 2018 18:10:56 +0200
+
 apulse (0.1.10+git20171108-gaca334f-2) unstable; urgency=medium
 
   * Disable building for unsupported platforms (Closes: #882010)
