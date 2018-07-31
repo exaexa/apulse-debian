@@ -1,3 +1,9 @@
+apulse (0.1.12-2) unstable; urgency=medium
+
+  * Support multi-arch builds (Thanks Yuriy M. Kaminskiy)
+
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Tue, 31 Jul 2018 08:40:03 +0200
+
 apulse (0.1.12-1) unstable; urgency=medium
 
   * Upstream release 0.1.12 (Closes: #899043)

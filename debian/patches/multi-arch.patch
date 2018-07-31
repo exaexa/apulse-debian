@@ -1,0 +1,34 @@
+Patch the build infrastructure to support multiarch.
+Index: apulse-0.1.12/CMakeLists.txt
+===================================================================
+--- apulse-0.1.12.orig/CMakeLists.txt
++++ apulse-0.1.12/CMakeLists.txt
+@@ -1,6 +1,8 @@
+ project(apulse)
+ cmake_minimum_required (VERSION 2.8)
+ 
++include(GNUInstallDirs)
++
+ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -fPIC -fvisibility=hidden")
+ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror=implicit-function-declaration")
+ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+@@ -72,7 +74,7 @@ target_link_libraries(pulse-simple ${SYM
+ 
+ add_subdirectory(tests)
+ 
+-set(APULSEPATH "${CMAKE_INSTALL_PREFIX}/lib/apulse" CACHE PATH "library installation directory")
++set(APULSEPATH "${CMAKE_INSTALL_LIBDIR}/apulse" CACHE PATH "library installation directory")
+ set(APULSE_SEARCH_PATHS "${APULSEPATH}" CACHE PATH "directory list for LD_LIBRARY_PATH")
+ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/apulse.template"
+                "${CMAKE_CURRENT_BINARY_DIR}/apulse" @ONLY)
+Index: apulse-0.1.12/src/apulse.template
+===================================================================
+--- apulse-0.1.12.orig/src/apulse.template
++++ apulse-0.1.12/src/apulse.template
+@@ -1,5 +1,5 @@
+ #!/bin/sh
+ 
+-APULSEPATH="@APULSE_SEARCH_PATHS@"
++APULSEPATH='/usr/$LIB/apulse'
+ 
+ LD_LIBRARY_PATH=$APULSEPATH${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH} exec "$@"
