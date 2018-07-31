@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Mirek Kratochvil <exa.exa@gmail.com>
 Build-Depends: debhelper (>= 11), cmake, pkg-config, libasound2-dev, libglib2.0-dev
 Rules-Requires-Root: no
-Standards-Version: 4.1.4
+Standards-Version: 4.1.5
 Homepage: https://github.com/i-rinat/apulse
 Vcs-Git: https://github.com/exaexa/apulse-debian.git
 Vcs-Browser: https://github.com/exaexa/apulse-debian
