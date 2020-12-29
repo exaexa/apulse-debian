@@ -20,7 +20,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCONFIG_LOG_TO_STDERR=${LOG_TO_STDERR}")
 
 include_directories(${REQ_INCLUDE_DIRS})
 
-set(USE_BUNDLED_PULSEAUDIO_HEADERS 1 CACHE BOOLEAN "Use bundled PulseAudio headers instead of system ones")
+set(USE_BUNDLED_PULSEAUDIO_HEADERS 1 CACHE BOOL "Use bundled PulseAudio headers instead of system ones")
 if (${USE_BUNDLED_PULSEAUDIO_HEADERS})
     include_directories(3rdparty/pulseaudio-headers)
 else()
@@ -64,11 +64,12 @@ set_target_properties(pulse PROPERTIES VERSION 0)
 set_target_properties(pulse-mainloop-glib PROPERTIES VERSION 0)
 set_target_properties(pulse-simple PROPERTIES VERSION 0)
 
-set(SYMBOLMAP "-Wl,-version-script=\"${CMAKE_SOURCE_DIR}/src/symbolmap\"")
+set(CMAKE_SHARED_LINKER_FLAGS
+    "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-version-script=\"${CMAKE_SOURCE_DIR}/src/symbolmap\"")
 
-target_link_libraries(pulse ${SYMBOLMAP} trace-helper ${REQ_LIBRARIES})
-target_link_libraries(pulse-mainloop-glib ${SYMBOLMAP} trace-helper ${REQ_LIBRARIES})
-target_link_libraries(pulse-simple ${SYMBOLMAP} trace-helper ${REQ_LIBRARIES})
+target_link_libraries(pulse trace-helper ${REQ_LIBRARIES})
+target_link_libraries(pulse-mainloop-glib trace-helper pulse ${REQ_LIBRARIES})
+target_link_libraries(pulse-simple trace-helper pulse ${REQ_LIBRARIES})
 
 add_subdirectory(tests)
 
