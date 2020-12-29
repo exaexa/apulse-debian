@@ -1,11 +1,15 @@
-apulse (0.1.12-3) UNRELEASED; urgency=medium
+apulse (0.1.13-1) unstable; urgency=medium
 
+  [ Debian Janitor ]
   * Bump debhelper from old 11 to 12.
   * Set debhelper-compat version in Build-Depends.
   * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
     Repository-Browse.
 
- -- Debian Janitor <janitor@jelmer.uk>  Mon, 02 Mar 2020 11:18:49 +0000
+  [ Mirek Kratochvil ]
+  * Upstream release 0.1.13
+
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Tue, 29 Dec 2020 15:42:06 +0100
 
 apulse (0.1.12-2) unstable; urgency=medium
 
