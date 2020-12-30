@@ -8,6 +8,7 @@ apulse (0.1.13-1) unstable; urgency=medium
 
   [ Mirek Kratochvil ]
   * Upstream release 0.1.13
+  * Fix shlibdeps for mutual deps in $LIBDIR/apulse
 
  -- Mirek Kratochvil <exa.exa@gmail.com>  Tue, 29 Dec 2020 15:42:06 +0100
 
