@@ -16,3 +16,6 @@ override_dh_makeshlibs:
 # defaulted by debhelper for cmake.
 override_dh_shlibdeps:
 	dh_shlibdeps -l/usr/lib/${DEB_HOST_MULTIARCH}/apulse
+
+override_dh_auto_configure:
+	dh_auto_configure -- -DCMAKE_BUILD_RPATH_USE_ORIGIN=ON
