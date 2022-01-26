@@ -17,5 +17,7 @@ override_dh_makeshlibs:
 override_dh_shlibdeps:
 	dh_shlibdeps -l/usr/lib/${DEB_HOST_MULTIARCH}/apulse
 
+# This is required for reproducible builds with cmake and RPATH settings
+# (see cmake_rpath_contains_build_path and bug #1003919)
 override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_BUILD_RPATH_USE_ORIGIN=ON
