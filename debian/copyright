@@ -3,11 +3,11 @@ Upstream-Name: apulse
 Source: https://github.com/i-rinat/apulse
 
 Files: *
-Copyright: 2017 Rinat Ibragimov <ibragimovrinat@mail.ru>
+Copyright: 2014-2018 Rinat Ibragimov <ibragimovrinat@mail.ru>
 License: MIT
 
 Files: debian/*
-Copyright: 2017 Mirek Kratochvil <exa.exa@gmail.com>
+Copyright: 2017-2022 Mirek Kratochvil <exa.exa@gmail.com>
 License: MIT
 
 Files: 3rdparty/pulseaudio-headers/*
