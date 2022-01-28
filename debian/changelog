@@ -1,3 +1,11 @@
+apulse (0.1.13-2) unstable; urgency=medium
+
+  [ Vagrant Cascadian ]
+  * Pass -DCMAKE_BUILD_RPATH_USE_ORIGIN=ON via dh_auto_configure
+    to make the builds reproducible. (Closes: #1003919)
+
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Fri, 28 Jan 2022 19:23:17 +0100
+
 apulse (0.1.13-1) unstable; urgency=medium
 
   [ Debian Janitor ]
