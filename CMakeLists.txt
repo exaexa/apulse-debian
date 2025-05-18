@@ -1,5 +1,5 @@
-project(apulse)
 cmake_minimum_required (VERSION 2.8...4.0)
+project(apulse)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -fPIC -fvisibility=hidden")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror=implicit-function-declaration")
