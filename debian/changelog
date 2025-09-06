@@ -1,3 +1,20 @@
+apulse (0.1.14-1) unstable; urgency=medium
+
+  [ Érico Rolim ]
+  * Add ENVIRONMENT to man-page.
+
+  [ Tim Gates ]
+  * docs: fix simple typo, withou -> without
+
+  [ Alexey Sokolov ]
+  * Fix build with musl 1.2.5
+  * Fix build with CMake 4 (Closes: #1112705)
+
+  [ Rinat Ibragimov ]
+  * cmake: move cmake_minimum_required() to the very top of CMakeLists.txt
+
+ -- Mirek Kratochvil <exa.exa@gmail.com>  Sat, 06 Sep 2025 11:39:06 +0200
+
 apulse (0.1.13-2) unstable; urgency=medium
 
   [ Vagrant Cascadian ]

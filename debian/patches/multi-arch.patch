@@ -4,15 +4,15 @@ Index: apulse-0.1.12/CMakeLists.txt
 --- apulse-0.1.12.orig/CMakeLists.txt
 +++ apulse-0.1.12/CMakeLists.txt
 @@ -1,6 +1,8 @@
+ cmake_minimum_required (VERSION 2.8...4.0)
  project(apulse)
- cmake_minimum_required (VERSION 2.8)
  
 +include(GNUInstallDirs)
 +
  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -fPIC -fvisibility=hidden")
  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror=implicit-function-declaration")
  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
-@@ -72,7 +74,7 @@ target_link_libraries(pulse-simple ${SYM
+@@ -73,7 +75,7 @@ target_link_libraries(pulse-simple ${SYM
  
  add_subdirectory(tests)
  
