@@ -1,0 +1,4 @@
+# This library is a very tiny wrapper which does not require libc at all (it
+# builds upon glib) and thus triggers the error. In this specific case we
+# assume the error to be a false positive.
+library-not-linked-against-libc [usr/lib/x86_64-linux-gnu/apulse/libpulse-mainloop-glib.so.0]
